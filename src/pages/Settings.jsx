@@ -1,6 +1,6 @@
 import Headings from "../components/Headings";
 import Row from "../components/Row";
-import SettingsForm from "../features/settings/SettingsForm";
+import SettingsForm from "../features/Settings/SettingsForm";
 function Settings() {
   return <>
     <Row>
