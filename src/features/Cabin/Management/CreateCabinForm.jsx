@@ -33,7 +33,6 @@ function CreateCabinForm({isEditMode = false, type ="regular"}) {
     register, 
     handleSubmit, 
     getValues,
-    watch, 
     reset,
     formState: { errors } } = useForm();
   

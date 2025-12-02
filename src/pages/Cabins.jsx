@@ -6,11 +6,13 @@ import CabinTable from "../features/Cabin/View/CabinTable";
 import AddCabin from "../features/Cabin/Management/AddCabin";
 import EditCabin from "../features/Cabin/Management/EditCabin";
 import Button from "../components/Button";
+import CabinsTableFilter from "../features/Cabin/Management/CabinsTableFilter";
 function Cabins() {
   return (
     <>
-      <Row>
+      <Row type="horizontal">
         <Headings as="h1">All cabins</Headings>
+        <CabinsTableFilter/>
       </Row>
       <Row type="vertical">
         <Routes>

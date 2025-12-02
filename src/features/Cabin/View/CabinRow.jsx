@@ -56,7 +56,7 @@ export default function CabinRow({ cabin }) {
       <Cabin>{cabin["name"]}</Cabin>
       <Cabin>Fits up to <Emphasis>{cabin["max_capacity"]}</Emphasis> guests</Cabin>
       <Price>{formatCurrency(cabin["regular_price"])}</Price>
-      <Discount>{formatCurrency(cabin["discount"])}</Discount>
+      <Discount>{ cabin["discount"] > 0 ? formatCurrency(cabin["discount"]): "-"}</Discount>
       <Modal>
         <Menus.Menu>
           <Menus.Toggle id={cabin["id"]}/>
