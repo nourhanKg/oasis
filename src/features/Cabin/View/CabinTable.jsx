@@ -5,6 +5,7 @@ import CabinRow from "./CabinRow";
 import Spinner from "../../../components/Spinner";
 import Table  from "../../../components/Table";
 import Menus from "../../../components/Menus";
+import Empty from "../../../components/Empty";
 export default function CabinTable() {
   // code splitting
   const {isPending, cabins, cabinsError} = useCabins()
@@ -31,6 +32,7 @@ export default function CabinTable() {
     sortedCabins = filteredCabins.reverse();
   }
   if(isPending) return <Spinner />
+  if(!cabins.length) return <Empty resourceName="cabins" />
   if(!cabinsError) return (
     <Menus>
       <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
