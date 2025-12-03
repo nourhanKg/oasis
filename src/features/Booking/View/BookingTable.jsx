@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 
 import { getBookings } from "../../../services/apiBookings";
@@ -9,13 +10,17 @@ import Spinner from "../../../components/Spinner";
 import Empty from "../../../components/Empty";
 
 function BookingTable() {
+  const [searchParams] = useSearchParams();
+  //1) filtering
+  const status = searchParams.get("status") || "all";
+  //2) sorting
+  const sortBy = searchParams.get("sortBy") || "start_date-asc";
+  const [field, direction] = sortBy.split("-");
   const {data: bookings = [], isPending, error} = useQuery({
-    queryKey: ['bookings'],
-    queryFn: getBookings,
+    queryKey: ['bookings', status, field, direction],
+    queryFn: () => getBookings( (status === "all" || !status) ? null : {field: "status", value: status}, {field: field, direction: direction}),
     staleTime: 0
   })
-  console.log(isPending)
-
   if(isPending) return <Spinner />
   if(!bookings.length) return <Empty resourceName="bookings" />
   return (
