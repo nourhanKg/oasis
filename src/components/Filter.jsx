@@ -1,3 +1,4 @@
+import { se } from "date-fns/locale";
 import { useSearchParams } from "react-router";
 import styled, { css } from "styled-components";
 
@@ -38,6 +39,7 @@ const FilterButton = styled.button`
 export default function Filter({filteredField, options}) {
   const [searchParams, setSearchParams] = useSearchParams();
   const handleClick = (value) => {
+    searchParams.set("page", 1);
     searchParams.set(filteredField, value);
     setSearchParams(searchParams);
   }
