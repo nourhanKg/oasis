@@ -9,10 +9,13 @@ import Tag from "../../../components/Tag";
 import ButtonGroup from "../../../components/ButtonGroup";
 import Button from "../../../components/Button";
 import ButtonText from "../../../components/ButtonText";
+import Modal from "../../../components/Modal"
+import ConfirmDelete from "../../../components/ConfirmDeletion";
 
 import { useMoveBack } from "../../../hooks/useMoveBack";
 import useBooking from "../../../hooks/useBooking";
-
+import useCheckout from "../../../hooks/useCheckout";
+import {useDeleteBooking} from "../../../hooks/useDeleteBooking";
 const HeadingGroup = styled.div`
   display: flex;
   gap: 2.4rem;
@@ -22,7 +25,9 @@ const HeadingGroup = styled.div`
 function BookingDetail() {
   const navigate = useNavigate();
   
-  const {booking, isPending, error} = useBooking();
+  const {booking, isPending} = useBooking();
+  const {checkOut, isCheckingOut} = useCheckout();
+  const {deleteBookingById, isDeleting} = useDeleteBooking();
   const status = booking?.status;
 
   const moveBack = useMoveBack();
@@ -51,6 +56,25 @@ function BookingDetail() {
             </Button>
           )
         }
+        {
+          status === "checked-in" && (
+            <Button variation="secondary" disabled={isCheckingOut} onClick={() => checkOut(booking?.id)}>
+              Check Out Booking #{booking?.id}
+            </Button>
+          )
+        }
+        <Modal>
+          <Modal.Open opens="delete">
+            <Button variant="danger">
+              Delete
+            </Button>
+          </Modal.Open>
+          <Modal.Window name="delete">
+            <ConfirmDelete disabled={isDeleting} resourceName={booking?.id} onConfirm={() => deleteBookingById(booking?.id, {
+              onSettled: () => navigate(-1),
+            })} />
+          </Modal.Window>
+        </Modal>
         <Button variation="secondary" onClick={moveBack}>
           Back
         </Button>

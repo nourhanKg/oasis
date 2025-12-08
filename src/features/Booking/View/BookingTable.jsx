@@ -23,7 +23,7 @@ function BookingTable() {
   const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
 
   //Query
-  const {data, isPending, error} = useQuery({
+  const {data, isPending} = useQuery({
     queryKey: ['bookings', filter, field, direction, page],
     queryFn: () => getBookings( filter, {field: field, direction: direction}, page),
     staleTime: 0
@@ -33,7 +33,6 @@ function BookingTable() {
   const numOfPages = Math.ceil(data?.count / PAGE_SIZE);
   const queryClient = useQueryClient();
   if(page < numOfPages ) {
-    console.log("getting next page")
     queryClient.prefetchQuery({
       queryKey: ['bookings', filter, field, direction, page + 1],
       queryFn: () => getBookings( filter, {field: field, direction: direction}, page + 1),
