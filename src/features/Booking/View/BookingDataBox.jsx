@@ -7,10 +7,10 @@ import {
   HiOutlineHomeModern,
 } from "react-icons/hi2";
 
-import DataItem from "../../ui/DataItem";
-import { Flag } from "../../ui/Flag";
+import DataItem from "../../../components/DataItem";
+import { Flag } from "../../../components/Flag";
 
-import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
+import { formatDistanceFromNow, formatCurrency } from "../../../utils/helpers";
 
 const StyledBookingDataBox = styled.section`
   /* Box */
@@ -22,7 +22,10 @@ const StyledBookingDataBox = styled.section`
 `;
 
 const Header = styled.header`
-  background-color: var(--color-brand-500);
+  background-color: ${({ type }) => 
+    type === "checkin" 
+      ? "var(--color-yellow-700)" 
+      : "var(--color-brand-500)"};
   padding: 2rem 4rem;
   color: #e0e7ff;
   font-size: 1.8rem;
@@ -102,26 +105,26 @@ const Footer = styled.footer`
 `;
 
 // A purely presentational component
-function BookingDataBox({ booking }) {
+function BookingDataBox({ booking, type }) {
   const {
     created_at,
-    startDate,
-    endDate,
-    numNights,
-    numGuests,
-    cabinPrice,
-    extrasPrice,
-    totalPrice,
-    hasBreakfast,
+    start_date:startDate,
+    end_date: endDate,
+    num_of_nights: numNights,
+    mum_of_guests: numGuests,
+    cabin_price: cabinPrice,
+    extras_price: extrasPrice,
+    total_price: totalPrice,
+    has_breakfast: hasBreakfast,
     observations,
-    isPaid,
-    guests: { fullName: guestName, email, country, countryFlag, nationalID },
+    has_paid: isPaid,
+    guests: { full_name: guestName, email, country, country_flag: countryFlag, passportId },
     cabins: { name: cabinName },
   } = booking;
 
   return (
     <StyledBookingDataBox>
-      <Header>
+      <Header type={type}>
         <div>
           <HiOutlineHomeModern />
           <p>
@@ -147,7 +150,7 @@ function BookingDataBox({ booking }) {
           <span>&bull;</span>
           <p>{email}</p>
           <span>&bull;</span>
-          <p>National ID {nationalID}</p>
+          <p>Passport ID {passportId}</p>
         </Guest>
 
         {observations && (

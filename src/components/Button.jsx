@@ -70,6 +70,10 @@ const buttonStyles = css`
   cursor: pointer;
   ${({ size = "medium" }) => sizes[size]}
   ${({ variant = "primary" }) => variants[variant]}
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
 
 // Base <button>

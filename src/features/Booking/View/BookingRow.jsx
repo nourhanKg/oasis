@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { format, isToday } from "date-fns";
+import { HiEye, HiPencil } from "react-icons/hi";
 
 import Tag from "../../../components/Tag";
 import Table from "../../../components/Table";
-
+import Menus from "../../../components/Menus";
 import { formatCurrency } from "../../../utils/helpers";
 import { formatDistanceFromNow } from "../../../utils/helpers";
 
@@ -54,6 +56,7 @@ function BookingRow({
     "checked-out": "silver",
   };
 
+  const navigate = useNavigate();
   return (
     <Table.Row>
       <Cabin>{cabinName}</Cabin>
@@ -79,6 +82,16 @@ function BookingRow({
       <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
+      <Menus.Menu>
+        <Menus.Toggle id={bookingId} />
+        <Menus.List id={bookingId}>
+          <Menus.Button onClick={() => navigate(`/bookings/${bookingId}`)}><HiEye /> See Details</Menus.Button>
+          {
+            status === "unconfirmed" &&
+            <Menus.Button onClick={() => navigate(`/checkin/${bookingId}`)}><HiPencil /> Check In</Menus.Button>
+          }
+        </Menus.List>
+      </Menus.Menu>
     </Table.Row>
   );
 }
