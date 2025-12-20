@@ -10,13 +10,17 @@ import Users from "./pages/Users"
 import Settings from "./pages/Settings"
 import PageNotFound from "./pages/PageNotFound"
 import AppLayout from "./components/AppLayout"
+import Login from "./pages/Login"
+import ProtectedRoute from "./components/ProtectedRoute"
 function App() {
 
   return (
     <QueryClientProvider>
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout/>}>
+          <Route element={<ProtectedRoute>
+              <AppLayout/>
+            </ProtectedRoute>}>
             <Route index element={<Navigate replace to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/bookings" element={<Bookings />} />
@@ -27,6 +31,7 @@ function App() {
             <Route path="/users" element={<Users />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
+          <Route path="/login" element={<Login/>}>Login</Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

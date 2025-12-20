@@ -21,6 +21,11 @@ const Headings = styled.h1`
         color: var(--color-grey-0);
         letter-spacing: -0.5px; */
     `}
+    ${props => props.as === "h4" && css`
+        font-size: 3rem;
+        font-weight: 600;
+        text-align: center;
+    `}
 `
 export default Headings;
 
