@@ -12,6 +12,7 @@ import PageNotFound from "./pages/PageNotFound"
 import AppLayout from "./components/AppLayout"
 import Login from "./pages/Login"
 import ProtectedRoute from "./components/ProtectedRoute"
+import Account from "./pages/Account"
 function App() {
 
   return (
@@ -30,6 +31,7 @@ function App() {
             </Route>
             <Route path="/users" element={<Users />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/account" element={<Account />} />
           </Route>
           <Route path="/login" element={<Login/>}>Login</Route>
           <Route path="*" element={<PageNotFound />} />

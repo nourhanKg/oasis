@@ -1,16 +1,16 @@
 import { useForm } from "react-hook-form";
-import Button from "../../ui/Button";
-import Form from "../../ui/Form";
-import FormRow from "../../ui/FormRow";
-import Input from "../../ui/Input";
+import Button from "../../components/Button";
+import Form from "../../components/Form";
+import FormControl from "../../components/FormControl";
+import Input from "../../components/Input";
 
-import { useUpdateUser } from "./useUpdateUser";
+import useUpdateUser from "./useUpdateUser";
 
 function UpdatePasswordForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
   const { errors } = formState;
 
-  const { updateUser, isUpdating } = useUpdateUser();
+  const { updateUser, isUpdatingUser } = useUpdateUser();
 
   function onSubmit({ password }) {
     updateUser({ password }, { onSuccess: reset });
@@ -18,7 +18,7 @@ function UpdatePasswordForm() {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormRow
+      <FormControl
         label="Password (min 8 characters)"
         error={errors?.password?.message}
       >
@@ -26,7 +26,7 @@ function UpdatePasswordForm() {
           type="password"
           id="password"
           autoComplete="current-password"
-          disabled={isUpdating}
+          disabled={isUpdatingUser}
           {...register("password", {
             required: "This field is required",
             minLength: {
@@ -35,9 +35,9 @@ function UpdatePasswordForm() {
             },
           })}
         />
-      </FormRow>
+      </FormControl>
 
-      <FormRow
+      <FormControl
         label="Confirm password"
         error={errors?.passwordConfirm?.message}
       >
@@ -45,20 +45,20 @@ function UpdatePasswordForm() {
           type="password"
           autoComplete="new-password"
           id="passwordConfirm"
-          disabled={isUpdating}
+          disabled={isUpdatingUser}
           {...register("passwordConfirm", {
             required: "This field is required",
             validate: (value) =>
               getValues().password === value || "Passwords need to match",
           })}
         />
-      </FormRow>
-      <FormRow>
-        <Button onClick={reset} type="reset" variation="secondary">
+      </FormControl>
+      <FormControl>
+        <Button onClick={reset} type="reset" variant="secondary">
           Cancel
         </Button>
-        <Button disabled={isUpdating}>Update password</Button>
-      </FormRow>
+        <Button disabled={isUpdatingUser}>Update password</Button>
+      </FormControl>
     </Form>
   );
 }

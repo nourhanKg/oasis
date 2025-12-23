@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import styled from "styled-components";
 
-import { HiHome, HiBuildingOffice, HiHomeModern } from "react-icons/hi2";
+import { HiHome, HiBuildingOffice, HiHomeModern, HiUserGroup } from "react-icons/hi2";
 import { FaGear } from "react-icons/fa6";
 
 
@@ -72,6 +72,12 @@ export default function MainNav() {
           <StyeledNavLink to="/cabins">
             <HiHomeModern />
             <span>Cabins</span>
+          </StyeledNavLink>
+        </li>
+        <li>
+          <StyeledNavLink to="/users">
+            <HiUserGroup />
+            <span>Users</span>
           </StyeledNavLink>
         </li>
         <li>
