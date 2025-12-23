@@ -4,6 +4,7 @@ import { HiOutlineUser } from 'react-icons/hi2'
 
 import ButtonIcon from './ButtonIcon'
 import Logout from '../features/Authentication/Logout'
+import DrakModeToggle from './DrakModeToggle'
 
 
 const StyledHeaderMenu = styled.ul`
@@ -22,6 +23,9 @@ export default function HeaderMenu() {
         </li>
         <li>
             <Logout/>
+        </li>
+        <li>
+            <DrakModeToggle/>
         </li>
     </StyledHeaderMenu>
   )
