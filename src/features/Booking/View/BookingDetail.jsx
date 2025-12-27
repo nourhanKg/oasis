@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 
 import BookingDataBox from "./BookingDataBox";
+import Empty from "../../../components/Empty";
 import Spinner from "../../../components/Spinner";
 import Row from "../../../components/Row";
 import Heading from "../../../components/Headings";
@@ -38,6 +39,7 @@ function BookingDetail() {
     "checked-out": "silver",
   };
   if(isPending) return (<Spinner />)
+  if(!booking) return (<Empty resource="booking" />)
   return (
     <>
       <Row type="horizontal">

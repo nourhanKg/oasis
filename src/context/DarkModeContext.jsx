@@ -12,7 +12,8 @@ export function useDarkMode() {
 }
 
 export default function DarkModeProvider({ children }) {
-  const [darkMode, setDarkMode] = useLocalStorageState(false, "darkMode");
+  const getOsPreference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [darkMode, setDarkMode] = useLocalStorageState(getOsPreference, "darkMode");
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
